@@ -1,15 +1,16 @@
 {% set name = "plumed" %}
-{% set version = "2.9.0" %}
+{% set version = "2.10" %}
+{% set git_rev = "b0ffcb55ad8cc3c71ec5c30a1bd46f68dd33bceb" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}
+  version: {{ version }}.git.{{ git_rev }}
 
 source:
-  url: https://github.com/plumed/plumed2/archive/v{{ version }}.tar.gz
-  sha256: 612d2387416b5f82dd8545709921440370e144fd46cef633654cf0ee43bac5f8
-  #git_url: https://github.com/plumed/plumed2.git
-  #git_rev: ddb59d16b21d6afb054fd9f6352f5d290e8575bf
+  # url: https://github.com/plumed/plumed2/archive/v{{ version }}.tar.gz
+  # sha256: 612d2387416b5f82dd8545709921440370e144fd46cef633654cf0ee43bac5f8
+  git_url: https://github.com/plumed/plumed2.git
+  git_rev: {{ git_rev }}
 
 build:
   number: 0
@@ -34,12 +35,16 @@ requirements:
     - liblapack
     - llvm-openmp  # [osx]
     - zlib
+    - libtorch
+    - libmetatensor-torch >=0.5.0,<0.6.0
   run:
 # for some not clear reason boost-cpp is needed here as well
     - boost-cpp
     - openmpi
     - gawk
     - llvm-openmp  # [osx]
+    - libtorch
+    - libmetatensor-torch >=0.5.0,<0.6.0
 
 test:
   commands:
