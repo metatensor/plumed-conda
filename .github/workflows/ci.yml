@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04 , macos-11]
+        os: [ubuntu-22.04, macos-11, macos-14]
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
@@ -23,10 +23,10 @@ jobs:
         export MAKEFLAGS=-j3
         conda create --name build
         source activate build
-        conda-build -c conda-forge plumed
-        conda-build -c conda-forge py-plumed
-        conda-build -c conda-forge gromacs
-        conda-build -c conda-forge lammps
+        conda-build -m .github/conda_build_config.yaml -c conda-forge plumed
+        conda-build -m .github/conda_build_config.yaml -c conda-forge py-plumed
+        conda-build -m .github/conda_build_config.yaml -c conda-forge gromacs
+        conda-build -m .github/conda_build_config.yaml -c conda-forge lammps
     - name: Deploy
       env:
         CONDA_UPLOAD_TOKEN: ${{ secrets.CONDA_UPLOAD_TOKEN }}
