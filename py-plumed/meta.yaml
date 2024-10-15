@@ -1,10 +1,10 @@
 {% set name = "py-plumed" %}
-{% set version = "2.10" %}
+{% set version = "2.10.dev1" %}
 {% set git_rev = "b0ffcb55ad8cc3c71ec5c30a1bd46f68dd33bceb" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version }}.git.{{ git_rev }}
+  version: {{ version }}
 
 source:
   # url: https://github.com/plumed/plumed2/archive/v{{ version }}.tar.gz
@@ -14,6 +14,7 @@ source:
 
 build:
   number: 0
+  string: git.{{ git_rev }}
   skip: True  # [win or py2k]
 
 requirements:
