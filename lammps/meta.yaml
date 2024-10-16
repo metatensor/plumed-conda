@@ -13,7 +13,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - binutils
+    - binutils     # [not (osx and arm64)]
     - sed
     - make
     - cmake
@@ -50,4 +50,3 @@ about:
     under the terms of the GNU Public License (GPL).
   doc_url: http://lammps.sandia.gov/doc/Manual.html
   dev_url: https://github.com/lammps/lammps
-
